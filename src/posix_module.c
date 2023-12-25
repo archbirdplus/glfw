@@ -38,7 +38,11 @@
 
 void* _glfwPlatformLoadModule(const char* path)
 {
-    return dlopen(path, RTLD_LAZY | RTLD_LOCAL);
+    void* module = dlopen(path, RTLD_LAZY | RTLD_LOCAL);
+    if (!module) {
+       printf("%s", dlerror());
+    }
+    return module;
 }
 
 void _glfwPlatformFreeModule(void* module)
