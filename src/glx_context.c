@@ -267,6 +267,9 @@ GLFWbool _glfwInitGLX(void)
         "libGL-1.so",
 #elif defined(__OpenBSD__) || defined(__NetBSD__)
         "libGL.so",
+#elif defined(__APPLE__)
+        "libGL.1.dylib",
+        "libGL.dylib",
 #else
         "libGLX.so.0",
         "libGL.so.1",

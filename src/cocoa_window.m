@@ -26,6 +26,7 @@
 // It is fine to use C99 in this file because it will not be built with VS
 //========================================================================
 
+#import <QuartzCore/CAMetalLayer.h>
 #include "internal.h"
 
 #if defined(_GLFW_COCOA)
@@ -345,15 +346,16 @@ static const NSRange kEmptyRange = { NSNotFound, 0 };
 - (instancetype)initWithGlfwWindow:(_GLFWwindow *)initWindow
 {
     self = [super init];
-    if (self != nil)
-    {
-        window = initWindow;
-        trackingArea = nil;
-        markedText = [[NSMutableAttributedString alloc] init];
-
-        [self updateTrackingAreas];
-        [self registerForDraggedTypes:@[NSPasteboardTypeURL]];
+    if (self == nil) {
+        return self;
     }
+
+    window = initWindow;
+    trackingArea = nil;
+    markedText = [[NSMutableAttributedString alloc] init];
+
+    [self updateTrackingAreas];
+    [self registerForDraggedTypes:@[NSPasteboardTypeURL]];
 
     return self;
 }
@@ -942,7 +944,9 @@ GLFWbool _glfwCreateWindowCocoa(_GLFWwindow* window,
             // EGL implementation on macOS use CALayer* EGLNativeWindowType so we
             // need to get the layer for EGL window surface creation.
             [window->ns.view setWantsLayer:YES];
-            window->ns.layer = [window->ns.view layer];
+            // window->ns.layer = [window->ns.view layer];
+            ((NSView *)window->ns.view).layer = [CAMetalLayer layer];
+            window->ns.layer = ((NSView *)window->ns.view).layer ;
 
             if (!_glfwInitEGL())
                 return GLFW_FALSE;
@@ -1095,6 +1099,7 @@ void _glfwSetWindowSizeCocoa(_GLFWwindow* window, int width, int height)
         contentRect.size = NSMakeSize(width, height);
         [window->ns.object setFrame:[window->ns.object frameRectForContentRect:contentRect]
                             display:YES];
+        [[window->ns.object layer] setDrawableSize:contentRect.size];
     }
 
     } // autoreleasepool

@@ -1,6 +1,12 @@
 
 link_libraries(glfw)
 
+if (APPLE)
+    set(CMAKE_MACOSX_RPATH 1)
+    set(CMAKE_INSTALL_RPATH "/usr/local/lib")
+    set(CMAKE_INSTALL_RPATH "/usr/local/MoltenZink/lib")
+endif()
+
 include_directories("${GLFW_SOURCE_DIR}/deps")
 
 if (MATH_LIBRARY)

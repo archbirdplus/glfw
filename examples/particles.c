@@ -966,6 +966,8 @@ int main(int argc, char** argv)
         }
     }
 
+    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+
     if (monitor)
     {
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);

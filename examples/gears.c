@@ -314,7 +314,8 @@ int main(int argc, char *argv[])
     }
 
     glfwWindowHint(GLFW_DEPTH_BITS, 16);
-    glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
+    glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_FALSE);
+    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
 
     window = glfwCreateWindow( 300, 300, "Gears", NULL, NULL );
     if (!window)
@@ -341,6 +342,7 @@ int main(int argc, char *argv[])
     // Main loop
     while( !glfwWindowShouldClose(window) )
     {
+
         // Draw gears
         draw();
 

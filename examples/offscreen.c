@@ -91,6 +91,7 @@ int main(void)
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
     window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);

@@ -108,6 +108,7 @@ extern "C" {
  #if defined(GLFW_EXPOSE_NATIVE_COCOA) || defined(GLFW_EXPOSE_NATIVE_NSGL)
   #if defined(__OBJC__)
    #import <Cocoa/Cocoa.h>
+   #import <QuartzCore/CAMetalLayer.h>
   #else
    #include <ApplicationServices/ApplicationServices.h>
    #include <objc/objc.h>
